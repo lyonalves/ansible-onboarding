@@ -1,0 +1,32 @@
+{
+  "user_details": [
+    {
+      "general": {
+        "uid": "Sidneira@musa.co",
+        "firstname": "Sidneira",
+        "lastname": "Barbada",
+        "email": "sidneira@musa.co",
+        "phone": "+5511999988887"
+      },
+      "gsuite": {
+        "password": "Musa@123",
+        "changePasswordAtNextLogin": true,
+        "orgUnitPath": "/Produto",
+        "aliases": [
+          "barbada@musa.co"
+        ],
+        "groups": {
+          "#Musers": {
+            "groupKey": "musers@musa.co",
+            "role": "MEMBER"
+          },
+          "Time Produto": {
+            "groupKey": "produto@musa.co",
+            "role": "MEMBER"
+          }
+        },
+        "state": "absent"
+      }
+    }
+  ]
+}

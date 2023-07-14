@@ -1,0 +1,62 @@
+- name: Manage Google Workspace users
+  hosts: localhost
+  vars_files:
+    - /home/lyon/PycharmProjects/ansible-google-iam/vault.yml
+    - /home/lyon/PycharmProjects/ansible-google-iam/vars.json
+  tasks:
+  - pip:
+      name:
+        - google-api-core==1.15.0
+        - google-api-python-client==1.8.4
+        - google-auth
+      extra_args: "--disable-pip-version-check --user"
+
+
+  - name: Manage users
+    gsuite_user:
+      google_private_key: '{{ google_private_key }}'
+      google_subject: 'lyon@musa.co'
+      email: '{{ item.general.email }}'
+      familyName: '{{ item.general.lastname }}'
+      givenName: '{{ item.general.firstname }}'
+      employeeId: '{{ item.general.uid }}'
+      password: '{{ item.gsuite.password | default("change.this.password.now!") }}'
+      changePasswordAtNextLogin: '{{ item.gsuite.changePasswordAtNextLogin | default(true) }}'
+      orgUnitPath: '{{ item.gsuite.orgUnitPath | default("/") }}'
+      aliases: '{{ item.gsuite.aliases }}'
+      groups: '{{ item.gsuite.groups }}'
+      suspended: false
+      transferUserEmail: '{{ item.gsuite.transferUserEmail | default("") }}'
+      state: '{{ item.gsuite.state | default("present") }}'
+    loop: "{{ user_details }}"
+
+
+  - name: Send notification message via Slack
+    community.general.slack:
+      token: '{{ token_slack }}'
+      msg: '{{ item.general.email }} Criado'
+      channel: '#ansible-test'
+    #delegate_to: localhost
+    loop: "{{ user_details }}"
+
+
+  - name: Sending an e-mail using Gmail SMTP servers
+    community.general.mail:
+      host: smtp.gmail.com
+      port: 587
+      username: "{{ email_username }}"
+      password: "{{ email_password }}"
+      to: lyon@musa.co, sidnei@musa.co
+      subject: "BOAS-VINDAS À MUSA ♻️🤖"
+      body: "{{ lookup ('template','/home/lyon/Downloads/boas_vindas_musa.html.j2') }}"
+      subtype: html
+      charset: utf8
+    delegate_to: localhost
+    loop: "{{ user_details }}"
+
+  
+  - name: Create user Atlassian
+    shell: >
+      curl --request POST --url "https://musatecnologia.atlassian.net/rest/api/3/user" --user "lyon@musa.co:{{ api_token_atlassian }}" --header "Accept: application/json" --header "Content-Type: application/json" --data "{ \"emailAddress\": \"{{ item.general.email }}\"}"
+    loop: "{{ user_details }}"
+    
