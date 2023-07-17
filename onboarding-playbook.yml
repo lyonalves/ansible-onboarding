@@ -32,7 +32,7 @@
 
 
   - name: Send notification message via Slack
-    community.general.slack:
+    slack:
       token: '{{ token_slack }}'
       msg: '{{ email }} Criado'
       channel: '#ansible-test'
