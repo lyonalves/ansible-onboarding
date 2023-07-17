@@ -1,5 +1,7 @@
 - name: Manage Google Workspace users
-  hosts: localhost
+  hosts: all
+  collections:
+    - community.general.slack
   vars_files:
     - /vault.yml
     
