@@ -1,7 +1,5 @@
 - name: Manage Google Workspace users
   hosts: localhost
-  collections:
-    - community.windows
   vars_files:
     - vault.yml
     
@@ -30,7 +28,6 @@
       suspended: false
       transferUserEmail: '{{ item.gsuite.transferUserEmail | default("") }}'
       state: '{{ item.gsuite.state | default("present") }}'
-    loop: "{{ user_details }}"
 
 
   - name: Send notification message via Slack
@@ -38,8 +35,6 @@
       token: '{{ token_slack }}'
       msg: '{{ email }} Criado'
       channel: '#ansible-test'
-    #delegate_to: localhost
-    loop: "{{ user_details }}"
 
 
   - name: Sending an e-mail using Gmail SMTP servers
@@ -54,11 +49,10 @@
       subtype: html
       charset: utf8
     delegate_to: localhost
-    loop: "{{ user_details }}"
 
   
   - name: Create user Atlassian
     shell: >
       curl --request POST --url "https://musatecnologia.atlassian.net/rest/api/3/user" --user "lyon@musa.co:{{ api_token_atlassian }}" --header "Accept: application/json" --header "Content-Type: application/json" --data "{ \"emailAddress\": \"{{ email }}\"}"
-    loop: "{{ user_details }}"
+
     
