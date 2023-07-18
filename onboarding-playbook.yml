@@ -3,7 +3,7 @@
   collections:
     - community.windows
   vars_files:
-    - /vault.yml
+    - vault.yml
     
   tasks:
   - pip:
