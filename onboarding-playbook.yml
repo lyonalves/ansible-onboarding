@@ -43,7 +43,7 @@
 
 
   - name: Sending an e-mail using Gmail SMTP servers
-    community.general.mail:
+    mail:
       host: smtp.gmail.com
       port: 587
       username: "{{ email_username }}"
