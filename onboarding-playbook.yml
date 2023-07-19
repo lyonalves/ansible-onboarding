@@ -37,15 +37,31 @@
       channel: '#ansible-test'
 
 
-  - name: Sending an e-mail using Gmail SMTP servers
+  - name: Sending an e-mail using Gmail SMTP servers - BoasVindas
     mail:
       host: smtp.gmail.com
       port: 587
       username: "{{ email_username }}"
       password: "{{ email_password }}"
-      to: lyon@musa.co, sidnei@musa.co
+      to: "{{ email_colab }}"
+      cc: "{{ email_gestor }}"
       subject: "BOAS-VINDAS À MUSA ♻️🤖"
       body: "{{ lookup ('template','boas_vindas_musa.html.j2') }}"
+      subtype: html
+      charset: utf8
+    delegate_to: localhost
+
+
+  - name: Sending an e-mail using Gmail SMTP servers - LowCost
+    mail:
+      host: smtp.gmail.com
+      port: 587
+      username: "{{ email_username }}"
+      password: "{{ email_password }}"
+      to: infra@musa.co
+      cc: "{{ email_gestor }}"
+      subject: "NOVO COLABORADOR NA MUSA 🤖"
+      body: "{{ lookup ('template','lowcost_email.html.j2') }}"
       subtype: html
       charset: utf8
     delegate_to: localhost
