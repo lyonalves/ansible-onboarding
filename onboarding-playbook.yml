@@ -23,7 +23,7 @@
       password: '{{ password | default("change.this.password.now!") }}'
       changePasswordAtNextLogin: '{{ item.gsuite.changePasswordAtNextLogin | default(true) }}'
       orgUnitPath: '{{ orgUnitPath | default("/") }}'
-      #aliases: '{{ item.gsuite.aliases }}'
+      aliases: '{{ email }}'
       groups: '{{ item.gsuite.groups }}'
       suspended: false
       transferUserEmail: '{{ item.gsuite.transferUserEmail | default("") }}'
