@@ -2,7 +2,7 @@
   hosts: localhost
   vars_files:
     - vault.yml
-    
+    - vars.json
   tasks:
   - pip:
       name:
@@ -24,7 +24,7 @@
       changePasswordAtNextLogin: '{{ item.gsuite.changePasswordAtNextLogin | default(true) }}'
       orgUnitPath: '{{ orgUnitPath | default("/") }}'
       #aliases: '{{ item.gsuite.aliases }}'
-      #groups: '{{ groups }}'
+      groups: '{{ groups }}'
       suspended: false
       transferUserEmail: '{{ item.gsuite.transferUserEmail | default("") }}'
       state: '{{ item.gsuite.state | default("present") }}'

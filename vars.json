@@ -19,13 +19,9 @@
           "#Musers": {
             "groupKey": "musers@musa.co",
             "role": "MEMBER"
-          },
-          "Time Produto": {
-            "groupKey": "produto@musa.co",
-            "role": "MEMBER"
           }
         },
-        "state": "absent"
+        "state": "present"
       }
     }
   ]
