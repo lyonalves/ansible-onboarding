@@ -24,11 +24,11 @@
       changePasswordAtNextLogin: '{{ item.gsuite.changePasswordAtNextLogin | default(true) }}'
       orgUnitPath: '{{ orgUnitPath | default("/") }}'
       #aliases: '{{ item.gsuite.aliases }}'
-      groups: '{{ groups }}'
+      groups: '{{ item.gsuite.groups }}'
       suspended: false
       transferUserEmail: '{{ item.gsuite.transferUserEmail | default("") }}'
       state: '{{ item.gsuite.state | default("present") }}'
-
+    loop: "{{ user_details }}"
 
   - name: Send notification message via Slack
     slack:
