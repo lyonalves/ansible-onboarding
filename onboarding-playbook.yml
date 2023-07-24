@@ -20,7 +20,7 @@
       familyName: '{{ lastname }}'
       givenName: '{{ firstname }}'
       employeeId: '{{ email }}'
-      password: '{{ password | default("change.this.password.now!") }}'
+      password: '{{ item.gsuite.password | default("change.this.password.now!") }}'
       changePasswordAtNextLogin: '{{ item.gsuite.changePasswordAtNextLogin | default(true) }}'
       orgUnitPath: '{{ orgUnitPath | default("/") }}'
       aliases: '{{ email }}'
