@@ -42,9 +42,9 @@
       host: smtp.gmail.com
       port: 587
       username: "{{ email_username }}"
-      password: "{{ email_password }}, daniely@musa.co"
+      password: "{{ email_password }}"
       to: "{{ email_colab }}"
-      cc: "{{ email_gestor }}"
+      cc: "{{ email_gestor }}, daniely@musa.co"
       subject: "BOAS-VINDAS À MUSA ♻️🤖"
       body: "{{ lookup ('template','boas_vindas_musa.html.j2') }}"
       subtype: html
