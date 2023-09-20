@@ -44,7 +44,7 @@
       username: "{{ email_username }}"
       password: "{{ email_password }}"
       to: "{{ email_colab }}"
-      cc: "{{ email_gestor }}"
+      cc: "{{ email_gestor }}", daniely@musa.co
       subject: "BOAS-VINDAS À MUSA ♻️🤖"
       body: "{{ lookup ('template','boas_vindas_musa.html.j2') }}"
       subtype: html
@@ -58,7 +58,8 @@
       port: 587
       username: "{{ email_username }}"
       password: "{{ email_password }}"
-      to: roberto.inacio@lowcost.com.br, leandromachado@musa.co
+      to: alveslyon@gmail.com
+      #to: roberto.inacio@lowcost.com.br, leandromachado@musa.co
       cc: "{{ email_gestor }}"
       subject: "NOVO COLABORADOR NA MUSA 🤖 - {{ firstname }}"
       body: "{{ lookup ('template','lowcost_email.html.j2') }}"
