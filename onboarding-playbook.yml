@@ -50,21 +50,6 @@
       charset: utf8
     delegate_to: localhost
 
-  - name: Sending an e-mail using Gmail SMTP servers - Convite Slack
-    mail:
-      host: smtp.gmail.com
-      port: 587
-      username: "{{ email_username }}"
-      password: "{{ email_password }}"
-      to: "{{ email_colab }}"
-      cc: daniely@musa.co
-      subject: "Musa convidou você para Entrar no Slack"
-      body: "{{ lookup ('template','convite_slack.html.j2') }}"
-      subtype: html
-      charset: utf8
-    delegate_to: localhost
-
-
   - name: Sending an e-mail using Gmail SMTP servers - LowCost
     mail:
       host: smtp.gmail.com
@@ -78,10 +63,21 @@
       subtype: html
       charset: utf8
     delegate_to: localhost
-
   
   - name: Create user Atlassian
     shell: >
       curl --request POST --url "https://musatecnologia.atlassian.net/rest/api/3/user" --user "lyon@musa.co:{{ api_token_atlassian }}" --header "Accept: application/json" --header "Content-Type: application/json" --data "{ \"emailAddress\": \"{{ email }}\"}"
 
-    
+  - name: Sending an e-mail using Gmail SMTP servers - Convite Slack
+    mail:
+      host: smtp.gmail.com
+      port: 587
+      username: "{{ email_username }}"
+      password: "{{ email_password }}"
+      to: "{{ email_colab }}"
+      cc: daniely@musa.co
+      subject: "Musa convidou você para Entrar no Slack"
+      body: "{{ lookup ('template','convite_slack.html.j2') }}"
+      subtype: html
+      charset: utf8
+    delegate_to: localhost  
