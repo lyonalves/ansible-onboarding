@@ -56,7 +56,7 @@
       port: 587
       username: "{{ email_username }}"
       password: "{{ email_password }}"
-      to: roberto.inacio@lowcost.com.br, leandromachado@musa.co
+      to: roberto.inacio@lowcost.com.br, leandromachado@musa.co, daniela@musa.co
       cc: "{{ email_gestor }}"
       subject: "NOVO COLABORADOR NA MUSA 🤖 - {{ firstname }}"
       body: "{{ lookup ('template','lowcost_email.html.j2') }}"
@@ -75,7 +75,7 @@
       username: "{{ email_username }}"
       password: "{{ email_password }}"
       to: "{{ email_colab }}"
-      cc: daniely@musa.co
+      cc: daniela@musa.co
       subject: "Musa convidou você para Entrar no Slack"
       body: "{{ lookup ('template','convite_slack.html.j2') }}"
       subtype: html
